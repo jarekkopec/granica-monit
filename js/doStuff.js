@@ -7,8 +7,8 @@ function renderMap(array) {
     .then(function(data) {
         console.log(data);
         
-        let projection = d3.geoEquirectangular();
-        projection.fitExtent([[20, 20], [620, 420]], data);
+        let projection = d3.geoMercator();
+        projection.fitExtent([[0, 20], [500, 400]], data);
         
         let geoGenerator = d3.geoPath()
             .projection(projection);
@@ -19,7 +19,8 @@ function renderMap(array) {
             .selectAll('path')
             .data(data.features)
             .join('path')
-            .attr('d', geoGenerator);
+            .attr('d', geoGenerator)
+            .classed('wojewodztwo', true);
 
         let points = d3.select('#content g.points')
             .selectAll('circle')
@@ -29,6 +30,15 @@ function renderMap(array) {
             .attr('cy', function(d) { return projection([d.lon, d.lat])[1]; })
             .attr('r', 10)
             .attr('fill', 'red');
+        
+            // let points = d3.select('#content g.points')
+            // .selectAll('circle')
+            // .data(array)
+            // .enter().append('circle')
+            // .attr('cx', function(d) { return projection([d.lon, d.lat])[0]; })
+            // .attr('cy', function(d) { return projection([d.lon, d.lat])[1]; })
+            // .attr('r', 10)
+            // .attr('fill', 'red');
     })
 
 };
@@ -55,8 +65,8 @@ function processSheetsData(response) {
 }
 
 function init() {
-  var url = 'https://docs.google.com/spreadsheets/d/1t8vqebxmhCS84CQB73g6sZDjHBY9VoRRW9YXUOeva1w/edit?usp=sharing';
+  var url = 'https://docs.google.com/spreadsheets/d/1id8a5Hp8OCk9PSgoCY4b9mSOCZLJ_YgUW1bQHmaUGPI/edit?usp=sharing';
   var query = new google.visualization.Query(url);
-  query.setQuery('select A, B, C, D');
+  query.setQuery('select A, B, C, D, E, F, G, H');
   query.send(processSheetsData);
 }
