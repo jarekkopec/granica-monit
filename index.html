@@ -2,19 +2,57 @@
 <head>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="js/d3.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <style>
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  h1, h2 {
+    font-family: 'Lora', serif;
+  }
+  h2 {
+    font-size: 12pt;
+  }
   .wojewodztwo {
     fill: #fafafa;
     stroke: #a7a7a7;
     stroke-width: 2px;
   }
+  .labels text {
+    font-size: 12px;
+    paint-order: stroke;
+    stroke-width: 5px;
+    stroke-linecap: butt;
+    stroke-linejoin: mitter;
+    font-weight: 300;
+    fill: black;
+    stroke: #fafafa;
+    font-family: 'Arial';
+  }
+  .point {
+    cursor: pointer;
+  }
+  #content {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto 50px auto;
+  }
+  strong {
+    font-weight: 500;
+  }
+
 </style>
 
 <body>
     
   <div id="content">
+    <h1>Stan na przejściach granicznych</h1>
+    <p>Najedź na wybrane przejście, żeby zobaczyć, jak wygląda sytuacja.</p>
     <svg width="500px" height="400px">
       <g class="map"></g>
       <g class="points"></g>
