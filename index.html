@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <head>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="js/d3.min.js"></script>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="js/d3.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.css" />
 </head>
 
 <style>
+  .iconRed {
+    font-family: 'Linearicons-Free' !important;
+    stroke: red;
+    background-color: red;
+    border-radius: 15px;
+  }
+  .iconYellow {
+    font-family: 'Linearicons-Free' !important;
+    stroke: rgb(255, 251, 0);
+    background-color: rgb(255, 251, 0);
+    border-radius: 15px;
+  }
+  .iconGrey {
+    font-family: 'Linearicons-Free' !important;
+    stroke: rgb(211, 211, 211);
+    background-color: rgb(211, 211, 211);
+    border-radius: 15px;
+  }
+  .iconInvisible {
+    font-family: 'Linearicons-Free' !important;
+    opacity: 0;
+  }
   body {
     font-family: 'Roboto', sans-serif;
   }
@@ -30,9 +53,9 @@
     stroke-linecap: butt;
     stroke-linejoin: mitter;
     font-weight: 300;
-    fill: black;
+    /* fill: black; */
     stroke: #fafafa;
-    font-family: 'Arial';
+    /* font-family: 'Arial'; */
   }
   .point {
     cursor: pointer;
@@ -45,21 +68,51 @@
   strong {
     font-weight: 500;
   }
+  table span {
+    font-size: 15px;
+  }
+  table {
+    font-size: 10pt;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
 
 </style>
 
 <body>
-    
+  Uwaga, to jest wersja robocza! Dane nie muszą być aktualne!
   <div id="content">
     <h1>Stan na przejściach granicznych</h1>
-    <p>Najedź na wybrane przejście, żeby zobaczyć, jak wygląda sytuacja.</p>
     <svg width="500px" height="400px">
       <g class="map"></g>
       <g class="points"></g>
       <g class="labels"></g>
     </svg>
+    <div id="legend">
+      <h2></h2>Legenda</h2>
+      <table>
+        <tr>
+          <td><span class="iconRed">&#xe84d;</span> - potrzebni kierowcy z samochodami</td>
+          <td><span class="iconRed">&#xe8a5;</span> - potrzebni wolontariusze</td>
+          <td><span class="iconRed">&#xe844;</span> - potrzebne zapasy</td>
+        </tr>
+        <tr>
+          <td><span class="iconYellow">&#xe84d;</span> - umiarkowanie potrzebni kierowcy z samochodami</td>
+          <td><span class="iconYellow">&#xe8a5;</span> - umiarkowanie potrzebni wolontariusze</td>
+          <td><span class="iconYellow">&#xe844;</span> - umiarkowanie potrzebne zapasy</td>
+        </tr>
+        <tr>
+          <td><span class="iconGrey">&#xe84d;</span> - nie brakuje kierowców/aut</td>
+          <td><span class="iconGrey">&#xe8a5;</span> - nie brakuje wolontariuszy</td>
+          <td><span class="iconGrey">&#xe844;</span> - nie brakuje zapasów</td>
+        </tr>
+      </table>
+    </div>
     <div id="panel">
 
+    </div>
+    <div id="footer">
+      Dane aktualizuje Grupa Granica.
     </div>
   </div>
 
