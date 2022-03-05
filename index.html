@@ -7,41 +7,33 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.css" />
 </head>
 
 <style>
-  .iconRed {
-    font-family: 'Linearicons-Free' !important;
-    stroke: red;
-    background-color: red;
-    border-radius: 15px;
-  }
-  .iconYellow {
-    font-family: 'Linearicons-Free' !important;
-    stroke: rgb(255, 251, 0);
-    background-color: rgb(255, 251, 0);
-    border-radius: 15px;
-  }
-  .iconGrey {
-    font-family: 'Linearicons-Free' !important;
-    stroke: rgb(211, 211, 211);
-    background-color: rgb(211, 211, 211);
-    border-radius: 15px;
-  }
-  .iconInvisible {
-    font-family: 'Linearicons-Free' !important;
-    opacity: 0;
-  }
   body {
     font-family: 'Roboto', sans-serif;
   }
   h1, h2 {
-    font-family: 'Lora', serif;
+    font-family: 'Roboto', sans-serif;
   }
   h2 {
     font-size: 12pt;
+  }
+  strong {
+    font-weight: 500;
+  }
+  table span {
+    font-size: 15px;
+  }
+  table {
+    font-size: 10pt;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+  circle {
+    fill: #6d6d6d;
   }
   .wojewodztwo {
     fill: #fafafa;
@@ -55,37 +47,43 @@
     stroke-linecap: butt;
     stroke-linejoin: mitter;
     font-weight: 300;
-    /* fill: black; */
     stroke: #fafafa;
-    /* font-family: 'Arial'; */
   }
-  .point {
-    cursor: pointer;
+  .iconRed {
+    font-family: 'Linearicons-Free' !important;
+    stroke: rgb(255, 150, 150);
+    background-color:  rgb(255, 150, 150);
+    border-radius: 15px;
+  }
+  .iconYellow {
+    font-family: 'Linearicons-Free' !important;
+    stroke: rgb(253, 251, 147);
+    background-color: rgb(253, 251, 147);
+    border-radius: 15px;
+  }
+  .iconGrey {
+    font-family: 'Linearicons-Free' !important;
+    stroke: rgb(230, 230, 230);
+    background-color: rgb(230, 230, 230);
+    border-radius: 15px;
+  }
+  .iconInvisible {
+    font-family: 'Linearicons-Free' !important;
+    opacity: 0;
   }
   #content {
     width: 100%;
     max-width: 500px;
     margin: 50px auto 50px auto;
   }
-  strong {
-    font-weight: 500;
-  }
-  table span {
-    font-size: 15px;
-  }
-  table {
-    font-size: 10pt;
-    margin-bottom: 50px;
-    margin-top: 20px;
-  }
-
+  
 </style>
 
 <body>
   Uwaga, to jest wersja robocza! Dane nie muszą być aktualne!
   <div id="content">
     <h1>Stan na przejściach granicznych</h1>
-    <svg width="500px" height="400px">
+    <svg width="350px" height="400px">
       <g class="map"></g>
       <g class="points"></g>
       <g class="labels"></g>
@@ -95,7 +93,7 @@
       <table>
         <tr>
           <td><span class="iconRed">&#xe84d;</span> - potrzebni kierowcy z samochodami</td>
-          <td><span class="iconRed">&#xe8a5;</span> - potrzebni wolontariusze</td>
+          <td><span class="iconRed">&#xe8a5;</span> - bardzo potrzebni wolontariusze</td>
           <td><span class="iconRed">&#xe844;</span> - potrzebne zapasy</td>
         </tr>
         <tr>
@@ -104,9 +102,9 @@
           <td><span class="iconYellow">&#xe844;</span> - umiarkowanie potrzebne zapasy</td>
         </tr>
         <tr>
-          <td><span class="iconGrey">&#xe84d;</span> - nie brakuje kierowców/aut</td>
-          <td><span class="iconGrey">&#xe8a5;</span> - nie brakuje wolontariuszy</td>
-          <td><span class="iconGrey">&#xe844;</span> - nie brakuje zapasów</td>
+          <td><span class="iconGrey">&#xe84d;</span> - nie potrzeba kierowców/aut</td>
+          <td><span class="iconGrey">&#xe8a5;</span> - nie potrzeba wolontariuszy</td>
+          <td><span class="iconGrey">&#xe844;</span> - nie potrzeba zapasów</td>
         </tr>
       </table>
     </div>
@@ -114,7 +112,9 @@
 
     </div>
     <div id="footer">
-      Dane aktualizuje Grupa Granica.
+      <p>Dane aktualizuje <a href="https://www.grupagranica.pl/" target="blank">Grupa Granica</a>.
+      <p>Ikony: <a href="https://linearicons.com/free" target="blank">Linearicons</a></p>
+      <p><a href="https://github.com/bekonowicz/granica-monit" target="blank">Kod źródłowy</a></p>
     </div>
   </div>
 

@@ -2,50 +2,31 @@ google.charts.load('current');
 google.charts.setOnLoadCallback(init);
 
 
-function renderPanel(event, d, shallClear) {
-    // if (!(shallClear)) {
-    //     d3.select('#panel').html(
-    //            '<table>'
-    //             + '<tr><td>Przejście graniczne</td><td>' + d.place_name + '</td></tr>'
-    //             + '<tr><td>Dojazd</td><td>' + d.dojazd + '</td></tr>>'
-    //             + '<tr><td>Auta i kierowcy</td><td>' + d.auta_kierowcy + '</td></tr>'
-    //             + '<tr><td>Wolontariusze</td><td>' + d.wolontariusze + '</td></tr>'
-    //             + '<tr><td>Magazyny</td><td>' + d.magazyny + '</td></tr>'
-    //         + '</table>'
-    //     )
-    // }
-    // else {
-    //     d3.select('#panel').html(
-    //         'wybierz przejście graniczne'
-    //     )
-    // }        
-}
-
 function composeLabel(d) {
     console.log(d.wolontariusze);
     let labelConent = '';
-    if (d.auta_kierowcy == 'są') {
+    if (d.auta_kierowcy == 1) {
         labelConent = '<tspan class="iconGrey">\ue84d</tspan>'
-    } else if (d.auta_kierowcy == 'niewielka potrzeba') {
+    } else if (d.auta_kierowcy == 2) {
         labelConent = '<tspan class="iconYellow">\ue84d</tspan>'
-    } else {
+    } else if (d.auta_kierowcy == 3) {
         labelConent = '<tspan class="iconGrey">\ue84d</tspan>'
     }
 
 
-    if (d.wolontariusze == 'są') {
+    if (d.wolontariusze == 1) {
         labelConent += '<tspan class="iconGrey">&nbsp;\ue8a5</tspan>'
-    } else if (d.wolontariusze == 'niewielka potrzeba') {
+    } else if (d.wolontariusze == 2) {
         labelConent += '<tspan class="iconYellow">&nbsp;\ue8a5</tspan>'
-    } else {
+    } else if (d.wolontariusze == 3) {
         labelConent += '<tspan class="iconRed">&nbsp;\ue8a5</tspan>'
     }
 
-    if (d.magazyny == 'pełne') {
+    if (d.magazyny == 1) {
         labelConent += '<tspan class="iconGrey">&nbsp;\ue844</tspan>'
-    } else if (d.magazyny == 'niewielka potrzeba') {
+    } else if (d.magazyny == 2) {
         labelConent += '<tspan class="iconYellow">&nbsp;\ue844</tspan>'
-    } else {
+    } else if (d.magazyny == 3) {
         labelConent += '<tspan class="iconRed">&nbsp;\ue844</tspan>'
     }
     
@@ -60,7 +41,7 @@ function renderMap(array) {
         console.log(data);
         
         let projection = d3.geoMercator();
-        projection.fitExtent([[0, 20], [500, 400]], data);
+        projection.fitExtent([[0, 0], [350, 400]], data);
         
         let geoGenerator = d3.geoPath()
             .projection(projection);
@@ -81,15 +62,8 @@ function renderMap(array) {
             .classed('point', true)
             .attr('cx', function(d) { return projection([d.lon, d.lat])[0]; })
             .attr('cy', function(d) { return projection([d.lon, d.lat])[1]; })
-            .attr('r', 5)
-            .attr('fill', 'red');
-            // .on('mouseover', function(event, d) {  })
-            // .on('mouseover', function(event, d) {
-            //     renderPanel(event, d, false);
-            //     points.attr('opacity', 0.5);
-            //     d3.select(this).attr('opacity', 1);
-            //     }
-            // );
+            .attr('r', 5);
+
         
         let labels = d3.select('#content g.labels')
             .selectAll('g.label')
@@ -106,9 +80,7 @@ function renderMap(array) {
             .attr('x', function(d) { return projection([d.lon, d.lat])[0] + 15; })
             .attr('y', function(d) { return projection([d.lon, d.lat])[1] + 3; });
         
-        // d3.selectAll('.point').on('mousover', function() {
-            // d3.selectAll('.point').attr('opcaity', 0.5);
-        // })
+
     })
 
 };
@@ -123,12 +95,12 @@ function processSheetsData(response) {
     for (r=1; r<numberOfRows; r++) {
         row = {
             place_name: data.getFormattedValue(r, 0),
-            lat: data.getFormattedValue(r, 9),
-            lon: data.getFormattedValue(r, 10),
-            dojazd: data.getFormattedValue(r, 1),
-            auta_kierowcy: data.getFormattedValue(r, 2),
-            wolontariusze: data.getFormattedValue(r, 4),
-            magazyny: data.getFormattedValue(r, 5),
+            lat: data.getFormattedValue(r, 1),
+            lon: data.getFormattedValue(r, 2),
+            dojazd: data.getFormattedValue(r, 3),
+            auta_kierowcy: data.getFormattedValue(r, 4),
+            wolontariusze: data.getFormattedValue(r, 6),
+            magazyny: data.getFormattedValue(r, 7),
             
         };
         
