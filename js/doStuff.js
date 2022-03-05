@@ -93,6 +93,7 @@ function processSheetsData(response) {
     console.log(numberOfRows);
     console.log(numberOfColumns);
     for (r=1; r<numberOfRows; r++) {
+        console.log(data.getFormattedValue(r, 0))
         row = {
             place_name: data.getFormattedValue(r, 0),
             lat: data.getFormattedValue(r, 1),
