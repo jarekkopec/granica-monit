@@ -2,36 +2,51 @@
 <head>
   <title>Stan na przejściach granicznych</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
   <script src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="js/d3.min.js"></script>
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.css" />
 </head>
 
 <style>
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
-  h1, h2 {
-    font-family: 'Roboto', sans-serif;
+  h1, h2, h3 {
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    letter-spacing: -.05em;
   }
   h2 {
+    border-bottom: 1px solid rgba(0,0,0,.1);
     font-size: 12pt;
+    padding-bottom: .5rem;
+  }
+  h3 {
+    font-size: 10pt;
   }
   strong {
     font-weight: 500;
   }
-  table span {
-    font-size: 15px;
-  }
   table {
-    font-size: 10pt;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    font-size: 8pt;
+    letter-spacing: -.03em;
+    margin-bottom: 2em;
+    margin-top: .5rem;
+    width: 100%;
+  }
+  table th {
+    text-align: left;
+    vertical-align: bottom;
+  }
+  table span {
+    display: inline-block;
+    font-size: 15px;
   }
   circle {
     fill: #6d6d6d;
@@ -50,78 +65,104 @@
     font-weight: 300;
     stroke: #fafafa;
   }
-  .iconRed {
+  .iconRed, .iconYellow, .iconGrey {
     font-family: 'Linearicons-Free' !important;
-    stroke: rgb(255, 150, 150);
-    background-color:  rgb(255, 150, 150);
     border-radius: 15px;
+    padding: 3px;
+  }
+  .iconRed {
+    background-color: rgb(255, 190, 190);
+    stroke: rgb(255, 190, 190);
   }
   .iconYellow {
-    font-family: 'Linearicons-Free' !important;
-    stroke: rgb(253, 251, 147);
-    background-color: rgb(253, 251, 147);
-    border-radius: 15px;
+    background-color: rgb(251, 224, 125);
+    stroke: rgb(251, 224, 125);
   }
   .iconGrey {
-    font-family: 'Linearicons-Free' !important;
-    stroke: rgb(230, 230, 230);
     background-color: rgb(230, 230, 230);
-    border-radius: 15px;
+    stroke: rgb(230, 230, 230);
   }
   .iconInvisible {
-    font-family: 'Linearicons-Free' !important;
     opacity: 0;
   }
   #content {
-    width: 100%;
-    max-width: 500px;
     margin: 50px auto 50px auto;
+    max-width: 500px;
+    width: 100%;
+  }
+  #footer {
+    font-size: 10pt;
+    color: rgba(0,0,0,.64);
+    padding: 1rem .5rem;
+    border-top: 1px solid rgba(0,0,0,.1);
+  }
+  #footer p {
+    margin: 0;
+    padding: 0;
+  }
+  #footer p:last-child {
+    padding-top: 0.5rem;
+  }
+  a, a:visited {
+    color: rgba(0,0,0,.75);
+  }
+  a:hover, a:active {
+    color: rgba(0,0,0,.9)
   }
   
 </style>
 
 <body>
   <div id="content">
-    <h1>Stan na przejściach granicznych</h1>
+    <!-- <h1>Stan na przejściach granicznych</h1> -->
     <svg width="350px" height="400px">
       <g class="map"></g>
       <g class="points"></g>
       <g class="labels"></g>
     </svg>
     <div id="legend">
-      <h2></h2>Legenda</h2>
+      <h2>Legenda</h2>
       <table>
-        <tr>
-          <td><span class="iconRed">&#xe84d;</span> - potrzebni kierowcy z samochodami</td>
-          <td><span class="iconRed">&#xe8a5;</span> - bardzo potrzebni wolontariusze</td>
-          <td><span class="iconRed">&#xe844;</span> - potrzebne zapasy</td>
-        </tr>
-        <tr>
-          <td><span class="iconYellow">&#xe84d;</span> - umiarkowanie potrzebni kierowcy z samochodami</td>
-          <td><span class="iconYellow">&#xe8a5;</span> - umiarkowanie potrzebni wolontariusze</td>
-          <td><span class="iconYellow">&#xe844;</span> - umiarkowanie potrzebne zapasy</td>
-        </tr>
-        <tr>
-          <td><span class="iconGrey">&#xe84d;</span> - nie potrzeba kierowców/aut</td>
-          <td><span class="iconGrey">&#xe8a5;</span> - nie potrzeba wolontariuszy</td>
-          <td><span class="iconGrey">&#xe844;</span> - nie potrzeba zapasów</td>
-        </tr>
+        <thead>
+          <tr>
+            <th><h3>Kierowcy <br>z samochodami</h3></th>
+            <th><h3>Wolontariusze</h3></th>
+            <th><h3>Zapasy</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="iconRed">&#xe84d;</span> potrzebni</td>
+            <td><span class="iconRed">&#xe8a5;</span> potrzebni</td>
+            <td><span class="iconRed">&#xe844;</span> potrzebne</td>
+          </tr>
+          <tr>
+            <td><span class="iconYellow">&#xe84d;</span> umiarkowanie potrzebni</td>
+            <td><span class="iconYellow">&#xe8a5;</span> umiarkowanie potrzebni</td>
+            <td><span class="iconYellow">&#xe844;</span> umiarkowanie potrzebne</td>
+          </tr>
+          <tr>
+            <td><span class="iconGrey">&#xe84d;</span> nie potrzeba</td>
+            <td><span class="iconGrey">&#xe8a5;</span> nie potrzeba</td>
+            <td><span class="iconGrey">&#xe844;</span> nie potrzeba</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div id="panel">
-
+      
     </div>
     <div id="footer">
-      <p>Dane aktualizuje <a href="https://www.grupagranica.pl/" target="blank">Grupa Granica</a>.
-      <p>Ikony: <a href="https://linearicons.com/free" target="blank">Linearicons</a></p>
-      <p><a href="https://github.com/bekonowicz/granica-monit" target="blank">Kod źródłowy</a></p>
+      <p>Dane aktualizuje <a href="https://grupagranica.pl/" target="blank">Grupa Granica</a>.
+        <p>Ikony: <a href="https://linearicons.com/free" target="blank">Linearicons</a></p>
+        <p><a href="https://github.com/bekonowicz/granica-monit" target="blank">Kod źródłowy</a></p>
+      </div>
     </div>
-  </div>
-
-
-  
-
+    
+    
+    
+    
     <script src="js/doStuff.js"></script>
     
-</body>
-</html>
+  </body>
+  </html>
