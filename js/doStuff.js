@@ -118,7 +118,7 @@ function processSheetsData(response) {
     var data = response.getDataTable();
     var numberOfRows = data.getNumberOfRows();
     var numberOfColumns = data.getNumberOfColumns();
-    for (r=1; r<numberOfRows; r++) {
+    for (r=0; r<numberOfRows; r++) {
         console.log(data.getFormattedValue(r, 0))
         row = {
             place_name: data.getFormattedValue(r, 0),
