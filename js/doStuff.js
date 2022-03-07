@@ -38,7 +38,7 @@ function composeLabelUkrainianSide(d) {
     } else if (d.zapchanieOgolne == 2) {
         labelConent += '<tspan class="iconYellow">\ue82b</tspan>'
     } else if (d.zapchanieOgolne == 3) {
-        labelConent += '<tspan class="iconGrey">\ue82b</tspan>'
+        labelConent += '<tspan class="iconRed">\ue82b</tspan>'
     }
     
     return labelConent;
