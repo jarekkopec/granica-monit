@@ -9,7 +9,7 @@ function composeLabelPolishSide(d) {
     } else if (d.autaKierowcy == 2) {
         labelConent += '<tspan class="iconYellow">\ue84d</tspan>'
     } else if (d.autaKierowcy == 3) {
-        labelConent += '<tspan class="iconGrey">\ue84d</tspan>'
+        labelConent += '<tspan class="iconRed">\ue84d</tspan>'
     }
 
     if (d.wolontariusze == 1) {
